@@ -274,9 +274,39 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                // write your code here.
+                
+                    // write your code here.
+                    //defining needed variables
+                    int sum1 = 0;
+                    int sum2 = 0;
+                    //Getting array length
+                    int arraylength = bulls_grid.GetLength(0);
+                    //Checking constraints
+                    for (int i = 0; i < arraylength; i++)
+                    {
+                        for (int j = 0; j < arraylength; j++)
+                        {
+                            //if row and column of the matrix is equal then we sum values as the primary diagonal
+                            if (i == j)
+                            {
+                                sum1 += bulls_grid[i, j];
+                                Console.WriteLine("sum of prim:" + sum1);
+                            }
+                            //Else if the row + column is equal to number of rows/columns-1 then we sum them up as secondary diagonal
+                            else if (i + j == arraylength - 1 && i != j)
+                            {
+                                sum2 += bulls_grid[i, j];
+                                Console.WriteLine("sum of other:" + sum2);
 
-                return 0;
+                            }
+                        }
+                    }
+                    //Print out the sum of both diagonals as the final result
+
+                    return sum1 + sum2;
+                    //This was a great problem. I learned how to look from different perspective and creatively at a problem
+                    //I learned to break down a problem to smaller solutions. it took me 3 hours to solve this one.
+                
             }
             catch (Exception e)
             {
@@ -307,7 +337,24 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here.
-                return "null";
+                //Defining needed variables
+                int arraylength = indices.Length;
+                char[] reversed = new char[arraylength];
+                int indexofchar = 0;
+                char gotcharacter;
+
+                //Looping over the array to find first index 0 and then find the associated character in string and put it in new array
+                for (int i = 0; i <= arraylength - 1; i++)
+                {
+                    indexofchar = Array.IndexOf(indices, i);
+                    gotcharacter = bulls_string[indexofchar];
+                    reversed[i] = gotcharacter;
+
+                }
+                //print out the result by concatinating the array of characters
+                string s = string.Concat(reversed);
+                return s;
+                //This problem waas fairly easy took me 1 hour to complete it.
             }
             catch (Exception e)
             {
@@ -346,8 +393,66 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                String prefix_string ="";
+                //Defining the needed variables
+                int InputStringLength = bulls_string6.Length;
+                int counter = 0;
+                int indexofchar = 0;
+                char[] reversed = new char[InputStringLength];
+                int j = 0;
+                string LeftOver = "";
+                string result = "";
+
+                //Chicking for constraints
+                if (InputStringLength > 250 || InputStringLength < 1)
+                {
+                    Console.WriteLine("The length of the input can not be more than 250 or less than 1 character");
+                }
+                else
+                {
+                    //checked to see if the string is lowercase or not
+                    if (bulls_string6.Equals(bulls_string6.ToLower()))
+                    {
+                        //check to see if the character is lowercase or not
+                        if (Char.IsUpper(ch))
+                        {
+                            Console.WriteLine("The character must be lower case");
+                        }
+                        else
+                        {
+                            //Finding the associated index of the character inside the string
+                            foreach (char c in bulls_string6)
+                            {
+                                if (c == ch && counter == 0)
+                                {
+                                    counter = 1;
+                                    indexofchar = bulls_string6.IndexOf(ch);
+
+                                }
+                            }
+                            //Put the characters in reversed order inside an array
+                            for (int i = indexofchar; i >= 0; i--)
+                            {
+                                reversed[j] = bulls_string6[i];
+                                j = j + 1;
+                            }
+                            //Getting whatever left of the string
+                            LeftOver = bulls_string6.Remove(0, indexofchar + 1);
+                            string s = new string(reversed);
+                            //concatinating the string and the reversed string
+                            result = s + LeftOver;
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter lower case string");
+                    }
+                }
+                String prefix_string = result;
                 return prefix_string;
+
+                //As a problem it was intresting to work so much with characters. I learned about new ways to handle my code than using existing methodes
+                //It took 4 hours to complete the task
             }
             catch (Exception)
             {
