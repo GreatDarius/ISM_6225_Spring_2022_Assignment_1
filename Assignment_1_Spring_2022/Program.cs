@@ -90,8 +90,28 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here
-                String final_string ="";
+                //Creating variable for storing result
+                String result = "";
+                //Checking constraint
+                if (s.Length > 10000 || s.Length < 0)
+                {
+                    Console.WriteLine("The length of the string is more than 10000 characters");
+                }
+                else
+                {
+                    foreach (char c in s)
+                    {
+                        //Check if vowels exist in string
+                        if (!"aeiouAEIOU".Contains(c.ToString()))
+                        {
+                            result = result + c;
+                        }
+                    }
+                }
+                //returning result
+                String final_string = result.ToString();
                 return final_string;
+                //This practice was fairly easy with using buildin function such as .Contains
             }
             catch (Exception)
             {
@@ -126,11 +146,28 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here.
-                return false;
+                //implementing constaints (Tolower)
+                string input1 = (string.Concat(bulls_string1)).ToLower();
+                string input2 = (string.Concat(bulls_string2)).ToLower();
+                int lengthOfInput1 = input1.Length;
+                int lengthOfInput2 = input2.Length;
+                //Checking whether the length of 2 strings are equal or not
+                if (lengthOfInput1 != lengthOfInput2)
+                {
+                    return false;
+                }
+                else
+                {
+                    //Chicking if the characters in both strings are the same
+                    return string.Equals(input1, input2);
+                }
+                //This practice had some challenges regrading comparsion of 2 different string char by char. it took me 1 hour to solve it.
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
+                Console.WriteLine("An error occured: " + e.Message);
                 throw;
             }
 
@@ -158,9 +195,54 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                // write your code here
-                return 0;
+                //Defining needed variables
+                int lengthofarray = bull_bucks.Length;
+                int[] duplicates = new int[lengthofarray];
+                int sum = 0;
+                int i = 0;
+                int j = 0;
+                int counter = 0;
+                //Chicking constraint
+                if (lengthofarray > 1000 || lengthofarray < 1)
+                {
+                    Console.WriteLine("The length of input is more than 100 or less than 1");
+                }
+                else
+                {
+                    //By creating a new array I can save 1 or more than one in array.
+                    //If the associated array is equal to 1 the number is unique and if it is greater than 1 the number is repeated
+                    for (i = 0; i < lengthofarray; i++)
+                    {
+                        duplicates[i] = -1;
+                    }
+                    for (i = 0; i < lengthofarray; i++)
+                    {
+                        counter = 1;
+                        for (j = i + 1; j < lengthofarray; j++)
+                        {
+                            if (bull_bucks[i] == bull_bucks[j])
+                            {
+                                counter++;
+                                duplicates[j] = 0;
+                            }
+                        }
+                        if (duplicates[i] != 0)
+                        {
+                            duplicates[i] = counter;
+                        }
+                    }
+                    //looping over unique values
+                    for (i = 0; i < lengthofarray; i++)
+                    {
+                        if (duplicates[i] == 1)
+                        {
+                            sum = sum + bull_bucks[i];
+                        }
+                    }
+                }
 
+                return sum;
+                //This assignment wes the hardest one and took me a day to figure out how to deal with constraint and the problem solution
             }
             catch (Exception)
             {
